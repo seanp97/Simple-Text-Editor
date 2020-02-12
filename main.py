@@ -11,28 +11,35 @@ newFiles = ""
 saveFiles = ""
 textCode = ""
 folderSelected = ""
+existPath = ""
 
 def newFile():
+    global folderSelected
     folderSelected = filedialog.askdirectory()
     global newFiles
     newFiles = askstring('New', 'New file')
     fNewFile = open(folderSelected + "/" + newFiles, "x")
+    global existPath
+    existPath = folderSelected + "/" + newFiles
     messagebox.showinfo("Created", newFiles + " has been created")
 
 def saveFile():
     global saveFiles
     global newFiles
-    if os.path.exists(newFiles):
+    global existPath
+    global folderSelected
+    if os.path.exists(existPath):
         textCode = textArea.get("1.0",END)
-        fSaveFile = open(newFiles, "w")
+        fSaveFile = open(folderSelected + "/" + newFiles, "w")
         fSaveFile.write(textCode)
         messagebox.showinfo("Saved", newFiles +  " has been saved")
     else:
-        newFile()
-        textCode = textArea.get("1.0",END)
-        fSaveFile = open(newFiles, "w")
-        fSaveFile.write(textCode)
-        messagebox.showinfo("Saved", newFiles +  " has been saved")
+        saveFolderSelected = filedialog.askdirectory()
+        textCodeSave = textArea.get("1.0",END)
+        newSavedFiles = askstring('New', 'New file')
+        fNewSaveFile = open(saveFolderSelected + "/" + newSavedFiles, "w")
+        fNewSaveFile.write(textCodeSave)
+        messagebox.showinfo("Saved", newSavedFiles +  " has been saved")
 
 app = Tk()
 app.title("Text Editor")
