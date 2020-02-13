@@ -9,7 +9,6 @@ from tkinter import filedialog
 import time
 
 newFiles = ""
-saveFiles = ""
 textCode = ""
 folderSelected = ""
 existPath = ""
@@ -19,6 +18,7 @@ Opened = False
 openString = ""
 
 def newFile():
+    Opened = False
     global folderSelected
     folderSelected = filedialog.askdirectory()
     global newFiles
@@ -29,7 +29,6 @@ def newFile():
     messagebox.showinfo("Created", newFiles + " has been created")
 
 def saveFile():
-    global saveFiles
     global newFiles
     global existPath
     global folderSelected
@@ -42,10 +41,10 @@ def saveFile():
         messagebox.showinfo("Saved", newFiles +  " has been saved")
 
     if Opened == True:
-        print(folderFile)
         getText = textArea.get("1.0",END)
         fOpenSave = open(folderFile, "w")
         fOpenSave.write(getText)
+        messagebox.showinfo("Saved", folderFile +  " has been saved")
     else:
         saveFolderSelected = filedialog.askdirectory()
         textCodeSave = textArea.get("1.0",END)
