@@ -63,6 +63,7 @@ def openFile():
     folderFile = filedialog.askopenfilename()
     fOpenFile = open(folderFile, "r")
     openString = fOpenFile.read()
+    textArea.delete('1.0', END)
     textArea.insert(END, openString)
 
 app = Tk()
